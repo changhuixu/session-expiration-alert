@@ -15,6 +15,11 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "session-expiration-alert": [
+        "dist/session-expiration-alert"
+      ]
+    }
   }
 }

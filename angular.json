@@ -116,6 +116,46 @@
           }
         }
       }
+    },
+    "session-expiration-alert": {
+      "root": "projects/session-expiration-alert",
+      "sourceRoot": "projects/session-expiration-alert/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/session-expiration-alert/tsconfig.lib.json",
+            "project": "projects/session-expiration-alert/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/session-expiration-alert/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/session-expiration-alert/src/test.ts",
+            "tsConfig": "projects/session-expiration-alert/tsconfig.spec.json",
+            "karmaConfig": "projects/session-expiration-alert/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/session-expiration-alert/tsconfig.lib.json",
+              "projects/session-expiration-alert/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "session-expiration-alert-demo"

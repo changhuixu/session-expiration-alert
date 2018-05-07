@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SessionTimerService } from 'session-expiration-alert';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  alertAt = 15;
+  startTimer = true;
+
+  constructor(public sessionTimer: SessionTimerService) {
+  }
+  increase() {
+    this.alertAt++;
+  }
+  toggletimer() {
+    this.startTimer = !this.startTimer;
+  }
 }
