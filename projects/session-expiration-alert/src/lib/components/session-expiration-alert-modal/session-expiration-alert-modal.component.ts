@@ -1,11 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { SessionInteruptService } from '../../services/session-interupt.service';
 import { SessionTimerService } from '../../services/session-timer.service';
 
 @Component({
-  templateUrl: './session-expiration-alert-modal.component.html',
-  styleUrls: ['./session-expiration-alert-modal.component.css']
+  templateUrl: './session-expiration-alert-modal.component.html'
 })
 export class SessionExpirationAlertModalComponent implements OnInit {
   constructor(

@@ -21,9 +21,7 @@ export class SessionTimerService {
    */
   remainSeconds$ = this._remainSeconds.asObservable();
 
-  constructor(
-    @Inject(ConfigToken) private readonly config: SessionExpirationConfig
-  ) {
+  constructor(@Inject(ConfigToken) readonly config: SessionExpirationConfig) {
     this._timeoutSeconds = config.totalMinutes * 60;
   }
 
