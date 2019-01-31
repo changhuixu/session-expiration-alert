@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { SessionExpirationAlert } from 'session-expiration-alert';
-import { SessionInteruptService } from 'session-expiration-alert';
+import { SessionExpirationAlert, SessionInteruptService } from 'session-expiration-alert';
 
 import { AppComponent } from './app.component';
 import { AppSessionInteruptService } from './services/app-session-interupt.service';

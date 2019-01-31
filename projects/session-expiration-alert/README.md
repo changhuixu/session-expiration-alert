@@ -9,9 +9,7 @@ An Angular module to time session expiration. When user session idle time reache
 
 Dependencies: Angular 6+, Bootstrap 4+(css), NgBootstrap 3+.
 
-## Demo
-
-<https://stackblitz.com/github/changhuixu/session-expiration-alert>
+## [Demo](https://session-expiration-alert.netlify.com/)
 
 ## Usage
 
