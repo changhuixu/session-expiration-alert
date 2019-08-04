@@ -22,7 +22,6 @@ In `app.module.ts`
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgbModule.forRoot(),
     SessionExpirationAlertModule.forRoot()
     // *** your other import modules
   ],
