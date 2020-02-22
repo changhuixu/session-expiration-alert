@@ -36,7 +36,7 @@ export class SessionExpirationAlert {
     config: SessionExpirationConfig = {
       totalMinutes: 20
     }
-  ): ModuleWithProviders {
+  ): ModuleWithProviders<SessionExpirationAlert> {
     return {
       ngModule: SessionExpirationAlert,
       providers: [

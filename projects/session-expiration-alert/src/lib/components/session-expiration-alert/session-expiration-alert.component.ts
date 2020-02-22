@@ -7,11 +7,7 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from '@angular/core';
-import {
-  NgbModal,
-  NgbModalOptions,
-  NgbModalRef
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SessionTimerService } from '../../services/session-timer.service';
 import { Subscription } from 'rxjs';
 import { SessionExpirationAlertModalComponent } from '../session-expiration-alert-modal/session-expiration-alert-modal.component';
@@ -26,10 +22,6 @@ export class SessionExpirationAlertComponent
   implements OnInit, OnChanges, OnDestroy {
   @Input() startTimer? = true;
   @Input() alertAt? = 60;
-  private readonly ngbModalOptions: NgbModalOptions = {
-    backdrop: 'static',
-    keyboard: false
-  };
   private modalRef: NgbModalRef;
   private sessionTimerSubscription: Subscription;
 
@@ -60,7 +52,10 @@ export class SessionExpirationAlertComponent
         if (t === this.alertAt) {
           this.modalRef = this.modalService.open(
             SessionExpirationAlertModalComponent,
-            this.ngbModalOptions
+            {
+              backdrop: 'static',
+              keyboard: false
+            }
           );
         }
         if (t === 0) {
