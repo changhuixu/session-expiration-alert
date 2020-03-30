@@ -10,8 +10,7 @@ export class AppComponent {
   alertAt = 15;
   startTimer = true;
 
-  constructor(public sessionTimer: SessionTimerService) {
-  }
+  constructor(public sessionTimer: SessionTimerService) {}
   increase() {
     this.alertAt++;
   }

@@ -46,8 +46,13 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -121,12 +126,19 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["projects/session-expiration-alert/tsconfig.lib.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "projects/session-expiration-alert/tsconfig.lib.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "session-expiration-alert-demo"
+  "defaultProject": "session-expiration-alert-demo",
+  "cli": {
+    "analytics": "0af0865d-dc84-49c5-bad2-fd170eb4b170"
+  }
 }
