@@ -7,7 +7,7 @@ import { SessionTimerService } from './services/session-timer.service';
 import { SessionTimerHttpInterceptor } from './services/session-timer-http-interceptor';
 import { SessionExpirationAlertComponent } from './components/session-expiration-alert/session-expiration-alert.component';
 import { SessionExpirationAlertModalComponent } from './components/session-expiration-alert-modal/session-expiration-alert-modal.component';
-import { SessionInteruptService } from './services/session-interupt.service';
+import { SessionInterruptService } from './services/session-interrupt.service';
 import {
   SessionExpirationConfig,
   ConfigToken
@@ -26,7 +26,7 @@ import {
       useClass: SessionTimerHttpInterceptor,
       multi: true
     },
-    SessionInteruptService
+    SessionInterruptService
   ],
   exports: [SessionExpirationAlertComponent],
   entryComponents: [SessionExpirationAlertModalComponent]

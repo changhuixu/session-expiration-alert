@@ -5,18 +5,18 @@ import {
   OnDestroy,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SessionTimerService } from '../../services/session-timer.service';
 import { Subscription } from 'rxjs';
 import { SessionExpirationAlertModalComponent } from '../session-expiration-alert-modal/session-expiration-alert-modal.component';
-import { SessionInteruptService } from '../../services/session-interupt.service';
+import { SessionInterruptService } from '../../services/session-interrupt.service';
 
 @Component({
   selector: 'session-expiration-alert',
   template: '',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SessionExpirationAlertComponent
   implements OnInit, OnChanges, OnDestroy {
@@ -28,7 +28,7 @@ export class SessionExpirationAlertComponent
   constructor(
     private sessionTimer: SessionTimerService,
     private modalService: NgbModal,
-    private sessionInterupter: SessionInteruptService
+    private sessionInterrupter: SessionInterruptService
   ) {}
 
   ngOnInit() {
@@ -48,13 +48,13 @@ export class SessionExpirationAlertComponent
   trackSessionTime() {
     this.sessionTimer.startTimer();
     this.sessionTimerSubscription = this.sessionTimer.remainSeconds$.subscribe(
-      t => {
+      (t) => {
         if (t === this.alertAt) {
           this.modalRef = this.modalService.open(
             SessionExpirationAlertModalComponent,
             {
               backdrop: 'static',
-              keyboard: false
+              keyboard: false,
             }
           );
         }
@@ -63,7 +63,7 @@ export class SessionExpirationAlertComponent
             this.modalRef.close();
           }
           this.cleanUp();
-          this.sessionInterupter.stopSession();
+          this.sessionInterrupter.stopSession();
         }
       }
     );

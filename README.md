@@ -8,11 +8,15 @@
 
 An Angular module to time session expiration. When user session idle time reaches a threshold, then pop up a modal dialog to let user choose to continue session or log out the system. When user session is expired, timer will stop and user will be logged out. A http interceptor is registered, so that session timer will restart at every http request.
 
-**v6.x** Dependencies: Angular 6+, Bootstrap 4+ (css), NgBootstrap 3+.
+**v11.0.0** Breaking Change: Corrected the name for the `SessionInterruptService` service.
+
+**v11.x** Dependencies: Angular 10+, Bootstrap 4.5+ (css), NgBootstrap 7+.
+
+**v10.x** Dependencies: Angular 10+, Bootstrap 4.5+ (css), NgBootstrap 7+.
 
 **v9.x** Dependencies: Angular 9+, Bootstrap 4+ (css), NgBootstrap 6+.
 
-**v10.x** Dependencies: Angular 10+, Bootstrap 4.5+ (css), NgBootstrap 7+.
+**v6.x** Dependencies: Angular 6+, Bootstrap 4+ (css), NgBootstrap 3+.
 
 ## [Demo](https://session-expiration-alert.netlify.com/)
 
@@ -26,16 +30,16 @@ In `app.module.ts`
   imports: [
     BrowserModule,
     HttpClientModule,
-    SessionExpirationAlertModule.forRoot()
+    SessionExpirationAlertModule.forRoot(),
     // *** your other import modules
   ],
   providers: [
     {
-      provide: SessionInteruptService,
-      useClass: AppSessionInteruptService
-    }
+      provide: SessionInterruptService,
+      useClass: AppSessionInterruptService,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
 ```
@@ -46,11 +50,11 @@ In `app.component.html`
 <session-expiration-alert></session-expiration-alert>
 ```
 
-In `app-session-interupt.service.ts`
+In `app-session-interrupt.service.ts`
 
 ```typescript
 @Injectable()
-export class AppSessionInteruptService extends SessionInteruptService {
+export class AppSessionInterruptService extends SessionInterruptService {
   constructor(private readonly httpClient: HttpClient) {
     super();
   }
@@ -65,7 +69,7 @@ export class AppSessionInteruptService extends SessionInteruptService {
 
 Then the `SessionTimerService` will start to count down at each second.
 
-- To provide actions in the alert modal dialog, you want to provide a `AppSessionInteruptService` class, which will be able to continue session via refreshing cookie, or stop session via logging out.
+- To provide actions in the alert modal dialog, you want to provide a `AppSessionInterruptService` class, which will be able to continue session via refreshing cookie, or stop session via logging out.
 
 - To start/stop/reset timer, inject `SessionTimerService` into your component or service, then call `startTimer()`, `stopTimer()`, `resetTimer()` as needed.
 

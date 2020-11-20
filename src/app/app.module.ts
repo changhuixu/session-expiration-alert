@@ -4,25 +4,25 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {
   SessionExpirationAlert,
-  SessionInteruptService
-} from 'session-expiration-alert';
+  SessionInterruptService,
+} from 'projects/session-expiration-alert/src/public-api';
 
 import { AppComponent } from './app.component';
-import { AppSessionInteruptService } from './services/app-session-interupt.service';
+import { AppSessionInterruptService } from './services/app-session-interrupt.service';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
-    SessionExpirationAlert.forRoot({ totalMinutes: 0.5 })
+    SessionExpirationAlert.forRoot({ totalMinutes: 0.5 }),
   ],
   providers: [
     {
-      provide: SessionInteruptService,
-      useClass: AppSessionInteruptService
-    }
+      provide: SessionInterruptService,
+      useClass: AppSessionInterruptService,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

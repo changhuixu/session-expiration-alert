@@ -1,7 +1,12 @@
-<session-expiration-alert [alertAt]="alertAt" [startTimer]="startTimer"></session-expiration-alert>
+<session-expiration-alert
+  [alertAt]="alertAt"
+  [startTimer]="startTimer"
+></session-expiration-alert>
 
-<button (click)="increase()">change alert at</button> {{alertAt}}
-<br>
-<button (click)="toggletimer()">toggle timer</button> {{startTimer}}
+<button (click)="increase()">change alert at</button> {{ alertAt }}
+<br />
+<button (click)="toggleTimer()">toggle timer</button> {{ startTimer }}
 
-<h2 *ngIf="sessionTimer.remainSeconds$ | async; let time">Session Remains {{time}} seconds.</h2>
+<h2 *ngIf="sessionTimer.remainSeconds$ | async; let time">
+  Session Remains {{ time }} seconds.
+</h2>

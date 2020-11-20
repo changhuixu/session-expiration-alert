@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class SessionInteruptService {
+export class SessionInterruptService {
   constructor() {}
 
   /**
    * Method to refresh session cookie. Normally, this method issue a quick API call to server.
    *
-   * @memberof SessionInteruptService
+   * @memberof SessionInterruptService
    */
   continueSession() {
     console.log('You clicked continue session.');
@@ -16,7 +16,7 @@ export class SessionInteruptService {
   /**
    * Method to remove session cookie. Normally, this method redirect to website log out end point.
    *
-   * @memberof SessionInteruptService
+   * @memberof SessionInterruptService
    */
   stopSession() {
     console.log('You clicked stop session.');

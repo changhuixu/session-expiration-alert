@@ -1,6 +1,6 @@
 {
   "name": "session-expiration-alert",
-  "version": "10.0.1",
+  "version": "11.0.0",
   "author": "Changhui Xu <changhuixu@hotmail.com>",
   "keywords": [
     "Angular",
