@@ -14,11 +14,11 @@ export class SessionInterruptService {
   }
 
   /**
-   * Method to remove session cookie. Normally, this method redirect to website log out end point.
+   * Method to remove session cookie. Normally, this method redirect to website logout endpoint.
    *
    * @memberof SessionInterruptService
    */
   stopSession() {
-    console.log('You clicked stop session.');
+    console.log('You clicked logout.');
   }
 }

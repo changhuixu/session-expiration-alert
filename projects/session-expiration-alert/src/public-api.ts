@@ -8,3 +8,4 @@ export * from './lib/services/session-interrupt.service';
 export * from './lib/services/session-timer-http-interceptor';
 export * from './lib/services/session-timer.service';
 export * from './lib/components/session-expiration-alert/session-expiration-alert.component';
+export * from './lib/components/session-expired-alert-modal/session-expired-alert-modal.component';

@@ -12,6 +12,7 @@ import { SessionTimerService } from '../../services/session-timer.service';
 import { Subscription } from 'rxjs';
 import { SessionExpirationAlertModalComponent } from '../session-expiration-alert-modal/session-expiration-alert-modal.component';
 import { SessionInterruptService } from '../../services/session-interrupt.service';
+import { SessionExpiredAlertModalComponent } from '../session-expired-alert-modal/session-expired-alert-modal.component';
 
 @Component({
   selector: 'session-expiration-alert',
@@ -20,7 +21,14 @@ import { SessionInterruptService } from '../../services/session-interrupt.servic
 })
 export class SessionExpirationAlertComponent
   implements OnInit, OnChanges, OnDestroy {
+  /**
+   * Should start the timer or not. Usually, you can set it to true if a user is authenticated.
+   */
   @Input() startTimer? = true;
+
+  /**
+   * Count down seconds.
+   */
   @Input() alertAt? = 60;
   private modalRef: NgbModalRef;
   private sessionTimerSubscription: Subscription;
@@ -63,7 +71,10 @@ export class SessionExpirationAlertComponent
             this.modalRef.close();
           }
           this.cleanUp();
-          this.sessionInterrupter.stopSession();
+          this.modalService.open(SessionExpiredAlertModalComponent, {
+            backdrop: 'static',
+            keyboard: false,
+          });
         }
       }
     );
