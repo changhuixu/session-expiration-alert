@@ -8,6 +8,8 @@
 
 An Angular module to time session expiration. When user session idle time reaches a threshold, then pop up a modal dialog to let user choose to continue session or log out the system. When user session is expired, timer will stop and an alert dialog will ask for actions. A http interceptor is registered, so that session timer will restart at every http request.
 
+**v13.x** Dependencies: Angular 13+.
+
 **v12.x** Dependencies: Angular 12+, Bootstrap 4.5+ (css), NgBootstrap 10+.
 
 **v11.1.2** When user session is expired, timer will stop and an alert dialog will ask for actions.

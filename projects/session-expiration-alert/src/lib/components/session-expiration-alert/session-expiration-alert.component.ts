@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  HostBinding,
+  HostListener,
   Input,
   OnChanges,
   OnDestroy,
@@ -32,8 +32,7 @@ export class SessionExpirationAlertComponent
    */
   @Input() alertAt? = 60;
 
-  @HostBinding('style.display')
-  showModal = 'none';
+  showModal = false;
   expired = false;
   private sessionTimerSubscription!: Subscription;
 
@@ -47,7 +46,8 @@ export class SessionExpirationAlertComponent
     if (!this.sessionTimerSubscription && this.startTimer) {
       this.trackSessionTime();
     }
-    // move element to bottom of page (just before </body>) so it can be displayed above everything else
+    // move element to bottom of page (just before </body>)
+    // so it can be displayed above everything else
     document.body.appendChild(this.el.nativeElement);
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -86,12 +86,12 @@ export class SessionExpirationAlertComponent
   }
 
   open(): void {
-    this.showModal = 'block';
+    this.showModal = true;
     document.body.classList.add('sea-modal-open');
   }
 
   close(): void {
-    this.showModal = 'none';
+    this.showModal = false;
     document.body.classList.remove('sea-modal-open');
   }
 
@@ -106,9 +106,37 @@ export class SessionExpirationAlertComponent
     location.reload();
   }
 
-  // remove self from modal service when component is destroyed
   ngOnDestroy(): void {
     this.el.nativeElement.remove();
     this.cleanUp();
+  }
+
+  @HostListener('document:keydown.tab', ['$event'])
+  handleTabKey(e: KeyboardEvent) {
+    const modal = document.querySelector('#session-expiration-alert');
+    if (modal) {
+      const btn1 = modal.querySelector<HTMLButtonElement>('button.btn-primary');
+      const btn2 = modal.querySelector<HTMLButtonElement>(
+        'button.btn-secondary'
+      );
+      if (document.activeElement === btn1) {
+        btn2?.focus();
+        e.preventDefault();
+      }
+    }
+  }
+  @HostListener('document:keydown.shift.tab', ['$event'])
+  handleShiftTabKey(e: KeyboardEvent) {
+    const modal = document.querySelector('#session-expiration-alert');
+    if (modal) {
+      const btn1 = modal.querySelector<HTMLButtonElement>('button.btn-primary');
+      const btn2 = modal.querySelector<HTMLButtonElement>(
+        'button.btn-secondary'
+      );
+      if (document.activeElement === btn2) {
+        btn1?.focus();
+        e.preventDefault();
+      }
+    }
   }
 }

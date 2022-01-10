@@ -4,6 +4,8 @@
   role="dialog"
   tabindex="-1"
   aria-modal="true"
+  aria-label="session-expiration-alert"
+  [hidden]="!showModal"
 >
   <div role="document" class="sea-modal-content" id="expiring" *ngIf="!expired">
     <div class="sea-modal-header">Session is about to expire</div>
@@ -17,12 +19,7 @@
       <button type="button" class="btn btn-secondary" (click)="logout()">
         Logout
       </button>
-      <button
-        type="button"
-        ngAutofocus
-        class="btn btn-primary"
-        (click)="continue()"
-      >
+      <button type="button" class="btn btn-primary" (click)="continue()">
         Continue Session
       </button>
     </div>
@@ -39,15 +36,10 @@
       <button type="button" class="btn btn-secondary" (click)="logout()">
         Logout
       </button>
-      <button
-        type="button"
-        ngAutofocus
-        class="btn btn-primary"
-        (click)="reload()"
-      >
+      <button type="button" class="btn btn-primary" (click)="reload()">
         Reload Page
       </button>
     </div>
   </div>
 </div>
-<div class="sea-modal-background"></div>
+<div class="sea-modal-background" [hidden]="!showModal"></div>
