@@ -1,6 +1,6 @@
 {
   "name": "session-expiration-alert",
-  "version": "12.0.0",
+  "version": "13.0.0",
   "author": "Changhui Xu <changhuixu@hotmail.com>",
   "keywords": [
     "Angular",
@@ -18,13 +18,13 @@
   "description": "An Angular module to time session expiration. When user session idle time reaches a threshold, then pop up a modal dialog to let user choose to continue session or log out the system. When user session is expired, timer will stop and user will be logged out.",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": ">=12.0.0",
-    "@angular/core": ">=12.0.0",
-    "@ng-bootstrap/ng-bootstrap": ">=10.0.0",
+    "@angular/common": ">=13.0.0",
+    "@angular/core": ">=13.0.0",
+    "@ng-bootstrap/ng-bootstrap": ">=11.0.0",
     "bootstrap": ">=4.5.0",
     "rxjs": ">=6.0.0"
   },
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.0"
   }
 }
