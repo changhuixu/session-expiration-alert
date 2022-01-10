@@ -7,10 +7,10 @@ export class AppSessionInterruptService extends SessionInterruptService {
   constructor(private readonly httpClient: HttpClient) {
     super();
   }
-  continueSession() {
+  override continueSession() {
     console.log(`I issue an API request to server.`);
   }
-  stopSession() {
+  override stopSession() {
     console.log(`I logout.`);
   }
 }

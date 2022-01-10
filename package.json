@@ -7,6 +7,8 @@
     "build": "ng build",
     "build:lib": "ng build session-expiration-alert --configuration production",
     "build:netlify": "ng build session-expiration-alert --configuration production & ng build --configuration production",
+    "ghpage": "npm run build:page && cp ./docs/index.html ./docs/404.html",
+    "build:page": "ng build --output-path docs --base-href /session-expiration-alert/",
     "watch": "ng build --watch --configuration development"
   },
   "private": true,

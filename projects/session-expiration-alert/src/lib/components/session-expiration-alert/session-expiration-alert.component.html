@@ -1,0 +1,53 @@
+<div
+  class="sea-modal"
+  id="session-expiration-alert"
+  role="dialog"
+  tabindex="-1"
+  aria-modal="true"
+>
+  <div role="document" class="sea-modal-content" id="expiring" *ngIf="!expired">
+    <div class="sea-modal-header">Session is about to expire</div>
+    <div class="sea-modal-body">
+      <p>
+        Your session will expire in
+        {{ sessionTimer.remainSeconds$ | async }} seconds.
+      </p>
+    </div>
+    <div class="sea-modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="logout()">
+        Logout
+      </button>
+      <button
+        type="button"
+        ngAutofocus
+        class="btn btn-primary"
+        (click)="continue()"
+      >
+        Continue Session
+      </button>
+    </div>
+  </div>
+  <div role="document" class="sea-modal-content" id="expired" *ngIf="expired">
+    <div class="sea-modal-header">Session expired</div>
+    <div class="sea-modal-body">
+      <p>
+        The current page is idle due to lack of activity. You can try to reload
+        this page or log out of the website.
+      </p>
+    </div>
+    <div class="sea-modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="logout()">
+        Logout
+      </button>
+      <button
+        type="button"
+        ngAutofocus
+        class="btn btn-primary"
+        (click)="reload()"
+      >
+        Reload Page
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sea-modal-background"></div>

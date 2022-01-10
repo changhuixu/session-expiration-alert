@@ -8,8 +8,8 @@ import {
 @Injectable()
 export class SessionTimerService {
   private readonly _timeoutSeconds: number;
-  private _count: number;
-  private timerSubscription: Subscription;
+  private _count: number = 0;
+  private timerSubscription!: Subscription;
   private timer: Observable<number> = interval(1000);
   private _remainSeconds = new Subject<number>();
   /**
