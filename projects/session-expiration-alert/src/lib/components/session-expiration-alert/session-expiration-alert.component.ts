@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
   Input,
+  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
@@ -39,7 +41,9 @@ export class SessionExpirationAlertComponent
   constructor(
     private el: ElementRef,
     private sessionInterrupter: SessionInterruptService,
-    public sessionTimer: SessionTimerService
+    public sessionTimer: SessionTimerService,
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -60,29 +64,38 @@ export class SessionExpirationAlertComponent
   }
 
   private trackSessionTime() {
-    this.sessionTimer.startTimer();
-    this.expired = false;
-    this.sessionTimerSubscription = this.sessionTimer.remainSeconds$.subscribe(
-      (t) => {
-        if (t === this.alertAt) {
-          this.open();
-        }
-        if (t === 0) {
-          this.expired = true;
-          this.cleanUp();
-        }
-      }
-    );
+    this.ngZone.runOutsideAngular(() => {
+      this.sessionTimer.startTimer();
+      this.expired = false;
+      this.sessionTimerSubscription =
+        this.sessionTimer.remainSeconds$.subscribe((t) => {
+          if (t === this.alertAt) {
+            this.open();
+          }
+          if (t === 0) {
+            this.expired = true;
+            this.cleanUp();
+          }
+          this.cdr.detectChanges();
+        });
+    });
   }
+
   continue() {
-    this.sessionInterrupter.continueSession();
-    this.sessionTimer.resetTimer();
-    this.close();
+    this.ngZone.runOutsideAngular(() => {
+      this.sessionInterrupter.continueSession();
+      this.sessionTimer.resetTimer();
+      this.close();
+      this.cdr.detectChanges();
+    });
   }
   logout() {
-    this.sessionTimer.stopTimer();
-    this.close();
-    this.sessionInterrupter.stopSession();
+    this.ngZone.runOutsideAngular(() => {
+      this.sessionTimer.stopTimer();
+      this.close();
+      this.sessionInterrupter.stopSession();
+      this.cdr.detectChanges();
+    });
   }
 
   open(): void {
