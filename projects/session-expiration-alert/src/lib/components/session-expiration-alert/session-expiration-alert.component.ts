@@ -70,6 +70,7 @@ export class SessionExpirationAlertComponent
         if (t === 0) {
           this.expired = true;
           this.cleanUp();
+          this.sessionInterrupter.onExpire();
         }
       }
     );

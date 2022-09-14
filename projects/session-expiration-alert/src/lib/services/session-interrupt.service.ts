@@ -21,4 +21,11 @@ export class SessionInterruptService {
   stopSession() {
     console.log('You clicked logout.');
   }
+
+  /**
+   * Method to handle expiration event. Can be empty.
+   */
+  onExpire() {
+    console.log('Session expired.');
+  }
 }

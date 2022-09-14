@@ -13,4 +13,8 @@ export class AppSessionInterruptService extends SessionInterruptService {
   override stopSession() {
     console.log(`I logout.`);
   }
+  override onExpire(): void {
+    console.log(`Session expired`);
+    console.log(`redirect to login page`);
+  }
 }
