@@ -18,11 +18,10 @@
     "importHelpers": true,
     "paths": {
       "session-expiration-alert": [
-        "dist/session-expiration-alert/session-expiration-alert",
         "dist/session-expiration-alert"
       ]
     },
-    "target": "es2017",
+    "target": "es2020",
     "module": "es2020",
     "lib": [
       "es2020",
