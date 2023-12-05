@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SessionTimerService } from 'projects/session-expiration-alert/src/public-api';
+import { SessionTimerService } from '../../projects/session-expiration-alert/src/public-api';
 
 @Component({
   selector: 'app-root',

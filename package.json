@@ -5,31 +5,31 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:lib": "ng build session-expiration-alert --configuration production",
-    "build:netlify": "ng build session-expiration-alert --configuration production & ng build --configuration production",
+    "build:lib": "ng build session-expiration-alert",
+    "build:netlify": "ng build session-expiration-alert & ng build",
     "ghpage": "npm run build:page && cp ./docs/index.html ./docs/404.html",
     "build:page": "ng build --output-path docs --base-href /session-expiration-alert/",
     "watch": "ng build --watch --configuration development"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^14.2.0",
-    "@angular/common": "^14.2.0",
-    "@angular/compiler": "^14.2.0",
-    "@angular/core": "^14.2.0",
-    "@angular/forms": "^14.2.0",
-    "@angular/platform-browser": "^14.2.0",
-    "@angular/platform-browser-dynamic": "^14.2.0",
-    "@angular/router": "^14.2.0",
-    "rxjs": "~7.5.0",
+    "@angular/animations": "^17.0.0",
+    "@angular/common": "^17.0.0",
+    "@angular/compiler": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@angular/forms": "^17.0.0",
+    "@angular/platform-browser": "^17.0.0",
+    "@angular/platform-browser-dynamic": "^17.0.0",
+    "@angular/router": "^17.0.0",
+    "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.14.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.2.2",
-    "@angular/cli": "~14.2.2",
-    "@angular/compiler-cli": "^14.2.0",
-    "ng-packagr": "^14.2.0",
-    "typescript": "~4.7.2"
+    "@angular-devkit/build-angular": "^17.0.5",
+    "@angular/cli": "^17.0.5",
+    "@angular/compiler-cli": "^17.0.0",
+    "ng-packagr": "^17.0.0",
+    "typescript": "~5.2.2"
   }
 }

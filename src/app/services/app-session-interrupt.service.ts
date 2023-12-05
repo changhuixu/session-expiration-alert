@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SessionInterruptService } from 'projects/session-expiration-alert/src/public-api';
+import { SessionInterruptService } from '../../../projects/session-expiration-alert/src/public-api';
 
 @Injectable()
 export class AppSessionInterruptService extends SessionInterruptService {

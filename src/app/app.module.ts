@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {
   SessionExpirationAlert,
   SessionInterruptService,
-} from 'projects/session-expiration-alert/src/public-api';
+} from '../../projects/session-expiration-alert/src/public-api';
 
 import { AppComponent } from './app.component';
 import { AppSessionInterruptService } from './services/app-session-interrupt.service';
