@@ -1,12 +1,14 @@
 # Session Expiration Alert
 
-[![Build Status](https://img.shields.io/travis/changhuixu/session-expiration-alert/master.svg?label=Travis%20CI&style=flat-square)](https://travis-ci.org/changhuixu/session-expiration-alert)
+[![Build Status](https://github.com/changhuixu/session-expiration-alert/actions/workflows/main.yml/badge.svg)](https://github.com/changhuixu/session-expiration-alert/actions)
 
 [![npm](https://img.shields.io/npm/v/session-expiration-alert.svg?style=flat-square)](https://www.npmjs.com/package/session-expiration-alert)
 
 [![npm License](https://img.shields.io/npm/l/session-expiration-alert.svg?style=flat-square)](https://github.com/changhuixu/session-expiration-alert/blob/master/LICENSE)
 
 An Angular module to time session expiration. When user session idle time reaches a threshold, then pop up a modal dialog to let user choose to continue session or log out the system. When user session is expired, timer will stop and an alert dialog will ask for actions. A http interceptor is registered, so that session timer will restart at every http request.
+
+**v19.x** Dependencies: Angular 19+.
 
 **v13.x** Dependencies: Angular 13+.
 

@@ -1,8 +1,8 @@
-import { Injectable, Inject } from '@angular/core';
-import { Observable, Subject, interval, Subscription } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { interval, Observable, Subject, Subscription } from 'rxjs';
 import {
   ConfigToken,
-  SessionExpirationConfig
+  SessionExpirationConfig,
 } from '../models/session-expiration-config';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class SessionTimerService {
   startTimer() {
     this.stopTimer();
     this._count = this._timeoutSeconds;
-    this.timerSubscription = this.timer.subscribe(n => {
+    this.timerSubscription = this.timer.subscribe((n) => {
       if (this._count > 0) {
         this._count--;
         this._remainSeconds.next(this._count);

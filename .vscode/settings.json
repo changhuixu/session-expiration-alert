@@ -1,7 +1,6 @@
 {
-    "cSpell.words": [
-        "devkit",
-        "ghpage",
-        "packagr"
-    ]
+  "cSpell.words": ["Changhui", "packagr"],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+  }
 }

@@ -18,6 +18,7 @@ import { SessionTimerService } from '../../services/session-timer.service';
   templateUrl: './session-expiration-alert.component.html',
   styleUrls: ['./session-expiration-alert.component.css', './btn.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class SessionExpirationAlertComponent
   implements OnInit, OnChanges, OnDestroy

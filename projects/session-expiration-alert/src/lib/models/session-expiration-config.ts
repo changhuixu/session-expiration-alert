@@ -1,9 +1,9 @@
 import { InjectionToken } from '@angular/core';
 
-interface SessionExpirationConfig {
+export interface SessionExpirationConfig {
   totalMinutes: number;
 }
 
-const ConfigToken = new InjectionToken<SessionExpirationConfig>('config');
-
-export { SessionExpirationConfig, ConfigToken };
+export const ConfigToken = new InjectionToken<SessionExpirationConfig>(
+  'config'
+);

@@ -1,26 +1,22 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
-import { SessionTimerService } from './services/session-timer.service';
-import { SessionTimerHttpInterceptor } from './services/session-timer-http-interceptor';
 import { SessionExpirationAlertComponent } from './components/session-expiration-alert/session-expiration-alert.component';
-import { SessionInterruptService } from './services/session-interrupt.service';
 import {
-  SessionExpirationConfig,
   ConfigToken,
+  SessionExpirationConfig,
 } from './models/session-expiration-config';
+import { SessionInterruptService } from './services/session-interrupt.service';
+import { sessionTimerHttpInterceptor } from './services/session-timer-http-interceptor';
+import { SessionTimerService } from './services/session-timer.service';
 
 @NgModule({
   imports: [CommonModule],
   declarations: [SessionExpirationAlertComponent],
   providers: [
     SessionTimerService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: SessionTimerHttpInterceptor,
-      multi: true,
-    },
+    provideHttpClient(withInterceptors([sessionTimerHttpInterceptor])),
     SessionInterruptService,
   ],
   exports: [SessionExpirationAlertComponent],

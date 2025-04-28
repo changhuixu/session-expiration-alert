@@ -1,22 +1,13 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SessionTimerService } from '../services/session-timer.service';
 
-@Injectable()
-export class SessionTimerHttpInterceptor implements HttpInterceptor {
-  constructor(private readonly timerService: SessionTimerService) {}
-
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    this.timerService.resetTimer();
-    return next.handle(request);
-  }
+export function sessionTimerHttpInterceptor(
+  req: HttpRequest<unknown>,
+  next: HttpHandlerFn
+): Observable<HttpEvent<unknown>> {
+  const timerService = inject(SessionTimerService);
+  timerService.resetTimer();
+  return next(req);
 }

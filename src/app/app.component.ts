@@ -1,10 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { SessionTimerService } from '../../projects/session-expiration-alert/src/public-api';
+import {
+  SessionExpirationAlert,
+  SessionInterruptService,
+  SessionTimerService,
+} from '../../projects/session-expiration-alert/src/public-api';
+import { AppSessionInterruptService } from './services/app-session-interrupt.service';
 
 @Component({
   selector: 'app-root',
+  imports: [CommonModule, SessionExpirationAlert],
+  providers: [
+    {
+      provide: SessionInterruptService,
+      useClass: AppSessionInterruptService,
+    },
+  ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   alertAt = 15;
