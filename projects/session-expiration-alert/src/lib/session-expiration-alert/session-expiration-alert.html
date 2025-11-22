@@ -7,24 +7,8 @@
   aria-label="session-expiration-alert"
   [hidden]="!showModal"
 >
-  <div role="document" class="sea-modal-content" id="expiring" *ngIf="!expired">
-    <div class="sea-modal-header">Session is about to expire</div>
-    <div class="sea-modal-body">
-      <p>
-        Your session will expire in
-        {{ sessionTimer.remainSeconds$ | async }} seconds.
-      </p>
-    </div>
-    <div class="sea-modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="logout()">
-        Logout
-      </button>
-      <button type="button" class="btn btn-primary" (click)="continue()">
-        Continue Session
-      </button>
-    </div>
-  </div>
-  <div role="document" class="sea-modal-content" id="expired" *ngIf="expired">
+  @if(expired){
+  <div role="document" class="sea-modal-content" id="expired">
     <div class="sea-modal-header">Session expired</div>
     <div class="sea-modal-body">
       <p>
@@ -41,5 +25,25 @@
       </button>
     </div>
   </div>
+  } @else {
+  <div role="document" class="sea-modal-content" id="expiring">
+    <div class="sea-modal-header">Session is about to expire</div>
+    <div class="sea-modal-body">
+      <p>
+        Your session will expire in
+        {{ sessionTimer.remainSeconds$ | async }} seconds.
+      </p>
+    </div>
+    <div class="sea-modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="logout()">
+        Logout
+      </button>
+      <button type="button" class="btn btn-primary" (click)="continue()">
+        Continue Session
+      </button>
+    </div>
+  </div>
+  }
 </div>
+
 <div class="sea-modal-background" [hidden]="!showModal"></div>

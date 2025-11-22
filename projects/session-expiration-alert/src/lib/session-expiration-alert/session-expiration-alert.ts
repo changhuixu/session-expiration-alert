@@ -1,8 +1,9 @@
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  HostListener,
+  inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -10,19 +11,22 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SessionInterruptService } from '../../services/session-interrupt.service';
-import { SessionTimerService } from '../../services/session-timer.service';
+import { SessionInterruptService } from '../services/session-interrupt.service';
+import { SessionTimerService } from '../services/session-timer.service';
 
 @Component({
   selector: 'session-expiration-alert',
-  templateUrl: './session-expiration-alert.component.html',
-  styleUrls: ['./session-expiration-alert.component.css', './btn.css'],
+  templateUrl: './session-expiration-alert.html',
+  styleUrls: ['./session-expiration-alert.css', './btn.css'],
+  imports: [AsyncPipe],
+  providers: [SessionInterruptService],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  host: {
+    '(document:keydown.tab)': 'handleTabKey($event)',
+    '(document:keydown.shift.tab)': 'handleShiftTabKey($event)',
+  },
 })
-export class SessionExpirationAlertComponent
-  implements OnInit, OnChanges, OnDestroy
-{
+export class SessionExpirationAlert implements OnInit, OnChanges, OnDestroy {
   /**
    * Should start the timer or not. Usually, you can set it to true if a user is authenticated.
    */
@@ -36,25 +40,20 @@ export class SessionExpirationAlertComponent
   showModal = false;
   expired = false;
   private sessionTimerSubscription!: Subscription;
-
-  constructor(
-    private el: ElementRef,
-    private sessionInterrupter: SessionInterruptService,
-    public sessionTimer: SessionTimerService
-  ) {}
+  private el = inject(ElementRef);
+  private sessionInterrupter = inject(SessionInterruptService);
+  public sessionTimer = inject(SessionTimerService);
 
   ngOnInit() {
     if (!this.sessionTimerSubscription && this.startTimer) {
       this.trackSessionTime();
     }
-    // move element to bottom of page (just before </body>)
-    // so it can be displayed above everything else
     document.body.appendChild(this.el.nativeElement);
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['startTimer']) {
+  ngOnChanges(changes: SimpleChanges<{ startTimer: boolean }>): void {
+    if (changes.startTimer) {
       this.cleanUp();
-      if (changes['startTimer'].currentValue) {
+      if (changes.startTimer.currentValue) {
         this.trackSessionTime();
       }
     }
@@ -113,8 +112,7 @@ export class SessionExpirationAlertComponent
     this.cleanUp();
   }
 
-  @HostListener('document:keydown.tab', ['$event'])
-  handleTabKey(e: KeyboardEvent) {
+  handleTabKey(event: Event) {
     const modal = document.querySelector('#session-expiration-alert');
     if (modal) {
       const btn1 = modal.querySelector<HTMLButtonElement>('button.btn-primary');
@@ -123,12 +121,11 @@ export class SessionExpirationAlertComponent
       );
       if (document.activeElement === btn1) {
         btn2?.focus();
-        e.preventDefault();
+        event.preventDefault();
       }
     }
   }
-  @HostListener('document:keydown.shift.tab', ['$event'])
-  handleShiftTabKey(e: KeyboardEvent) {
+  handleShiftTabKey(event: Event) {
     const modal = document.querySelector('#session-expiration-alert');
     if (modal) {
       const btn1 = modal.querySelector<HTMLButtonElement>('button.btn-primary');
@@ -137,7 +134,7 @@ export class SessionExpirationAlertComponent
       );
       if (document.activeElement === btn2) {
         btn1?.focus();
-        e.preventDefault();
+        event.preventDefault();
       }
     }
   }
