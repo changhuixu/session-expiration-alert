@@ -1,13 +1,11 @@
-import { Inject, Injectable } from '@angular/core';
-import { interval, Observable, Subject, Subscription } from 'rxjs';
-import {
-  ConfigToken,
-  SessionExpirationConfig,
-} from '../models/session-expiration-config';
+import { inject, Injectable } from '@angular/core';
+import { interval, Observable, shareReplay, Subject, Subscription } from 'rxjs';
+import { ConfigToken } from './session-expiration-config';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SessionTimerService {
-  private readonly _timeoutSeconds: number;
+  private readonly config = inject(ConfigToken);
+  private readonly _timeoutSeconds = this.config.totalMinutes * 60;
   private _count: number = 0;
   private timerSubscription!: Subscription;
   private timer: Observable<number> = interval(1000);
@@ -19,11 +17,7 @@ export class SessionTimerService {
    *
    * @memberof SessionTimerService
    */
-  remainSeconds$ = this._remainSeconds.asObservable();
-
-  constructor(@Inject(ConfigToken) readonly config: SessionExpirationConfig) {
-    this._timeoutSeconds = config.totalMinutes * 60;
-  }
+  remainSeconds$ = this._remainSeconds.asObservable().pipe(shareReplay(1));
 
   startTimer() {
     this.stopTimer();
