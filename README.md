@@ -8,6 +8,8 @@
 
 An Angular module to time session expiration. When user session idle time reaches a threshold, then pop up a modal dialog to let user choose to continue session or log out the system. When user session is expired, timer will stop and an alert dialog will ask for actions. A http interceptor is registered, so that session timer will restart at every http request.
 
+**v21.x** Dependencies: Angular 21+. Standalone component.
+
 **v19.x** Dependencies: Angular 19+.
 
 **v13.x** Dependencies: Angular 13+.
@@ -30,35 +32,35 @@ An Angular module to time session expiration. When user session idle time reache
 
 ## Usage
 
-In `app.module.ts`
+In `app.config.ts`
 
 ```typescript
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    SessionExpirationAlertModule.forRoot(),
-    // *** your other import modules
-  ],
+export const appConfig: ApplicationConfig = {
   providers: [
-    {
-      provide: SessionInterruptService,
-      useClass: AppSessionInterruptService,
-    },
+    ...// other providers
+    provideSessionExpirationServices(AppSessionInterruptService),
   ],
-  bootstrap: [AppComponent],
-})
-export class AppModule {}
+};
 ```
 
-In `app.component.html`
+In `app.html`
 
 ```html
-<session-expiration-alert></session-expiration-alert>
+<session-expiration-alert />
 ```
 
-In `app-session-interrupt.service.ts`
+In `app.ts`
+
+```typescript
+@Component({
+  selector: 'app-root',
+  imports: [SessionExpirationAlert], // import the standalone component
+  templateUrl: './app.html',
+  styleUrl: './app.css',
+})
+```
+
+In `app-session-interrupt.service.ts`, customize your interrupt service using your application's auth services or backend API calls.
 
 ```typescript
 @Injectable()
@@ -86,20 +88,19 @@ Then the `SessionTimerService` will start to count down at each second.
 ## Configuration
 
 ```typescript
- imports: [
-   // ***
-    SessionExpirationAlertModule.forRoot({totalMinutes: 0.5}),
-   //***
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideSessionExpirationServices(AppSessionInterruptService, {
+      totalMinutes: 0.5,
+    }),
   ],
+};
 ```
 
-The `SessionExpirationAlertModule` accepts a configuration with interface of `SessionExpirationConfig`, which is an optional input and has a default value of total minutes = 20 min.
+The `appConfig` accepts a configuration with interface of `SessionExpirationConfig`, which is an optional input and has a default value of total minutes = 20 min.
 
 ```html
-<session-expiration-alert
-  [startTimer]="true"
-  [alertAt]="2*60"
-></session-expiration-alert>
+<session-expiration-alert [startTimer]="true" [alertAt]="2*60" />
 ```
 
 [optional] `startTimer` indicates if the app needs to work on session expiration check or not. Default: true.
